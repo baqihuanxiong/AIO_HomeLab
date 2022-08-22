@@ -30,3 +30,9 @@ apt update
 apt install curl -y
 curl -sSL https://get.daocloud.io/docker | sh
 ```
+卸载`apparmor`，否则无法使用docker：
+```
+systemctl stop apparmor
+systemctl disable apparmor
+apt remove --assume-yes --purge apparmor
+```
