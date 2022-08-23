@@ -17,35 +17,6 @@ ide2: local:iso/openwrt-21.02.3-x86-64-generic-ext4-combined-efi.img,cache=unsaf
 ## firewall配置
 ![](./img/firewall.png)
 
-## miniupnp配置
-`/etc/config/upnpd`：
-```
-config upnpd 'config'
-        option download '1024'
-        option upload '512'
-        option internal_iface 'lan untrusted'
-        option external_iface 'wan'
-        option port '5000'
-        option upnp_lease_file '/var/run/miniupnpd.leases'
-        option igdv1 '1'
-        option enabled '1'
-        option uuid 'bd170636-93e4-42e9-a838-420ff3cd07f8'
-
-config perm_rule
-        option action 'allow'
-        option ext_ports '1024-65535'
-        option int_addr '0.0.0.0/0'
-        option int_ports '1024-65535'
-        option comment 'Allow high ports'
-
-config perm_rule
-        option action 'deny'
-        option ext_ports '0-65535'
-        option int_addr '0.0.0.0/0'
-        option int_ports '0-65535'
-        option comment 'Default deny'
-```
-
 ## mwan3配置
 `/etc/config/mwan3`：
 ```
@@ -118,4 +89,38 @@ config member 'wan2_m20_w2'
         option interface 'wan2'
         option metric '20'
         option weight '2'
+```
+
+## miniupnp配置
+`/etc/config/upnpd`：
+```
+config upnpd 'config'
+        option download '1024'
+        option upload '512'
+        option internal_iface 'lan untrusted'
+        option external_iface 'wan'
+        option port '5000'
+        option upnp_lease_file '/var/run/miniupnpd.leases'
+        option igdv1 '1'
+        option enabled '1'
+        option uuid 'bd170636-93e4-42e9-a838-420ff3cd07f8'
+
+config perm_rule
+        option action 'allow'
+        option ext_ports '1024-65535'
+        option int_addr '0.0.0.0/0'
+        option int_ports '1024-65535'
+        option comment 'Allow high ports'
+
+config perm_rule
+        option action 'deny'
+        option ext_ports '0-65535'
+        option int_addr '0.0.0.0/0'
+        option int_ports '0-65535'
+        option comment 'Default deny'
+```
+实测不支持填写多个wan到external_iface
+```
+service miniupnpd restart
+service miniupnpd service
 ```
