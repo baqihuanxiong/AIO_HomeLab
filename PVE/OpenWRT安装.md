@@ -9,6 +9,11 @@
 ide2: local:iso/openwrt-21.02.3-x86-64-generic-ext4-combined-efi.img,cache=unsafe
 ```
 
+## 查看日志
+```
+logread
+```
+
 ## VLAN配置
 在`Network->Interfaces->br-lan->Configuration->Bridge VLAN filtering`下勾选`Enable VLAN filtering`并配置VLAN标记，点`Save`后先**不要**点`Save & Apply`生效，修改`Network->Interfaces->lan->Global Settings->Device`为管理VLAN，然后点`Save & Apply`，**否则将无法连接Openwrt管理页面**。
 ![](./img/VLAN_tag.png)
